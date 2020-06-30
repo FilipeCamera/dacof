@@ -37,7 +37,3 @@ export const TextMenu = styled.Text`
     color: #FFF;
     margin: 10px 0px;
 `
-export const MenuImage = styled.Image`
-    width: 100px;
-    height: 100px;
-`;
