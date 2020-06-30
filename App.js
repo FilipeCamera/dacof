@@ -1,21 +1,28 @@
+import React, {useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as Font from 'expo-font';
+import {AppLoading} from 'expo';
+import Routes from './src/routes';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [loadedFont, setLoadedFont] = useState(false)
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  async function loadFont(){
+    await Font.loadAsync({
+      'Cairo': require('./assets/fonts/Cairo-Regular.ttf'),
+      'Cairo-Semibold': require('./assets/fonts/Cairo-SemiBold.ttf'),
+      'Cairo-Bold': require('./assets/fonts/Cairo-Bold.ttf')
+    })
+  }
+  if(loadedFont){
+    return(
+      <>
+        <StatusBar style='auto' />
+        <Routes />
+      </>
+    )
+  }
+  return (
+    <AppLoading startAsync={loadFont} onFinish={() => setLoadedFont(true)}/>
+  )
+}
