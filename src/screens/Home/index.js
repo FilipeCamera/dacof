@@ -31,7 +31,7 @@ export default function Home({navigation}) {
         icon={
           <MaterialCommunityIcons
             name={item.icon_name}
-            size={72}
+            size={80}
             color="#5b5b5b"
           />
         }
