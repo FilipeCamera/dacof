@@ -9,8 +9,12 @@ import Loja from "../screens/Loja";
 import Eventos from "../screens/Eventos";
 import Transparencia from "../screens/Transparencia";
 import Bus from "../screens/Bus";
+import Informes from "../screens/Informes";
+import Ouvidoria from "../screens/Ouvidoria";
+import Cadernos from "../screens/Cadernos";
 
 import { createStackNavigator } from "@react-navigation/stack";
+import Drawers from "./Drawer.routes";
 
 const Stack = createStackNavigator();
 
@@ -19,7 +23,7 @@ export default function Stacks() {
     <Stack.Navigator initialRouteName="Home">
       <Stack.Screen
         name="Home"
-        component={Home}
+        component={Drawers}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -60,6 +64,21 @@ export default function Stacks() {
       <Stack.Screen
         name="Bus"
         component={Bus}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Ouvidoria"
+        component={Ouvidoria}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Cadernos"
+        component={Cadernos}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Informes"
+        component={Informes}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

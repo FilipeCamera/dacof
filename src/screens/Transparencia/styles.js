@@ -21,9 +21,9 @@ export const BoxButton = styled.View`
 `;
 export const BoxHeaderButton = styled.View`
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    width: 80%;
+    justify-content: space-around;
+    width: 100%;
 `;
 
 export const TitleButton = styled.Text`
@@ -41,7 +41,7 @@ export const TextBodyBlack = styled.Text`
 `;
 export const TextBodyBlackBold = styled.Text`
     font-family: 'Cairo-Semibold';
-    font-size: 26px;
+    font-size: 24px;
     color: #2B2B2B;
 `;
 export const TextBodyRed = styled.Text`

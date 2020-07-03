@@ -24,7 +24,6 @@ export const BoxBus = styled.View`
 
 export const CardBus = styled.View`
     width: 160px;
-    height: 250px;
     background-color: #FF9090;
     border-radius: 20px;
     align-items: center;
@@ -43,7 +42,27 @@ export const CardText = styled.Text`
     color: #963132;
     width: 60%;
 `;
-
+export const CardSubText = styled.Text`
+    font-family: 'Cairo-Bold';
+    font-size: 14px;
+    color: #3B3B3B;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 10px;
+`;
+export const BoxHorario = styled.View`
+    width: 80%;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 5px 0px;
+`;
+export const CardHText = styled.Text`
+    font-family: 'Cairo-Bold';
+    font-size: 14px;
+    color: #3B3B3B;
+`;
 export const styles = StyleSheet.create({
     boxShadow: {
         shadowColor: "#000",

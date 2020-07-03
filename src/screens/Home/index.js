@@ -10,13 +10,16 @@ import Header from "../../components/Header";
 
 const data = [
   { title: "A Faculdade", icon_name: "school", link: 'Faculdade' },
-  { title: "Transparência", icon_name: "cash", link: 'Transparencia' },
   { title: "Horário de Aula", icon_name: "alarm-bell", link: 'Aulas' },
   { title: "Horário do Ônibus", icon_name: "bus-clock", link: 'Bus' },
   { title: "Links", icon_name: "link-variant", link: 'Links' },
-  { title: "Emails", icon_name: "email", link: 'Emails' },
+  { title: "Informes", icon_name: "information-variant", link: 'Informes' },
+  { title: "Transparência", icon_name: "cash", link: 'Transparencia' },
+  { title: "Ouvidoria", icon_name: "wechat", link: 'Ouvidoria' },
   { title: "Loja", icon_name: "store", link: 'Loja' },
-  { title: "Eventos", icon_name: "calendar", link: 'Eventos' },
+  { title: "Eventos Universitários", icon_name: "calendar", link: 'Eventos' },
+  { title: 'Cadernos Universitários', icon_name: 'book', link: 'Cadernos'},
+  { title: 'E-mail', icon_name: 'email', link: 'Emails'},
 ];
 
 const { width } = Dimensions.get("screen");

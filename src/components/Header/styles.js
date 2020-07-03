@@ -9,14 +9,12 @@ export const Container = styled.View`
     padding: 10px 20px;
     width: 100%;
     flex-direction: row;
+    justify-content: center;
     align-items: center;   
 `;
-
-export const MenuButton = styled.TouchableOpacity``;
 
 export const MenuText = styled.Text`
     font-family: 'Cairo-Bold';
     font-size: 16px;
     color: #9F3233;
-    margin-left: ${width/4 - 35};
 `;
