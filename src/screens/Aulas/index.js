@@ -29,8 +29,17 @@ import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 
 export default function Aulas({ navigation }) {
   const [aulas, setAulas] = useState([]);
+  const [aulaFiltrada, setAulaFiltrada] = useState([]);
+  const [aula, setAula] = useState("");
   const [visible, setVisible] = useState(false);
-  const [pesquisa, setPesquisa] = useState("");
+
+  function searchAula(textAula) {
+    setAulaFiltrada(
+      aulas.filter((i) =>
+        i.titulo.toLowerCase().includes(textAula.toLowerCase())
+      )
+    );
+  }
   useEffect(() => {
     async function loadAulas() {
       await api.get("/Aulas.json").then((resp) => {
@@ -42,6 +51,7 @@ export default function Aulas({ navigation }) {
           });
         }
         setAulas(aulasList);
+        setAulaFiltrada(aulasList);
         setVisible(true);
       });
     }
@@ -54,8 +64,11 @@ export default function Aulas({ navigation }) {
         <SearchBar
           lightTheme
           placeholder="Pesquisar"
-          value={pesquisa}
-          onChangeText={(e) => setPesquisa(e)}
+          value={aula}
+          onChangeText={(e) => {
+            searchAula(e);
+            setAula(e);
+          }}
           containerStyle={{
             width: Dimensions.get("screen").width,
             backgroundColor: "#F4F4F4",
@@ -66,11 +79,11 @@ export default function Aulas({ navigation }) {
             borderRadius: 20,
             height: 40,
           }}
-          inputStyle={{color: '#5B5B5B', fontFamily: 'Cairo'}}
+          inputStyle={{ color: "#5B5B5B", fontFamily: "Cairo" }}
         />
         <Title>Horário de Aula</Title>
         {aulas.length ? (
-          aulas.map((item) => (
+          aulaFiltrada.map((item) => (
             <BoxAula style={styles.boxShadow} key={item.id}>
               <BoxAulaSala>
                 <BoxSala>

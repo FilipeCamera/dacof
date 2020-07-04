@@ -1,9 +1,13 @@
 import React from 'react'
 
-import {Container} from './styles'
+import {Container, Title} from './styles'
+import HeaderRed from '../../components/HeaderRed'
 
-export default function Cadernos(){
+export default function Cadernos({navigation}){
     return(
-        <Container />
+        <Container>
+            <HeaderRed navigation={navigation}/>
+            <Title>Cadernos Universitários</Title>
+        </Container>
     )
 }
