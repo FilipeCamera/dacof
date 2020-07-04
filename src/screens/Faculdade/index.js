@@ -10,7 +10,7 @@ import {
 import { Button } from "react-native-elements";
 import HeaderRed from "../../components/HeaderRed";
 
-export default function Faculdade() {
+export default function Faculdade({navigation}) {
   const [textPrimaryColor, setPrimaryTextColor] = useState("#FFF");
   const [textSecundaryColor, setSecundaryTextColor] = useState("#5B5B5B");
   const [colorPrimary, setColorPrimary] = useState("#9F3233");
@@ -19,7 +19,7 @@ export default function Faculdade() {
 
   return (
     <Container>
-      <HeaderRed />
+      <HeaderRed navigation={navigation}/>
       <BoxButton>
         <Button
           containerStyle={{ width: 100, height: 30, borderRadius: 15 }}

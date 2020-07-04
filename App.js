@@ -17,7 +17,7 @@ export default function App() {
   if(loadedFont){
     return(
       <>
-        <StatusBar style='auto' backgroundColor='transparent' translucent={true}/>
+        <StatusBar style='light' backgroundColor='#9F3233' translucent={true}/>
         <Routes />
       </>
     )

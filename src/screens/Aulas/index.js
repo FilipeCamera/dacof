@@ -20,13 +20,17 @@ import {
   styles,
 } from "./styles";
 
+import { Dimensions } from "react-native";
+import { SearchBar } from "react-native-elements";
 import { api } from "../../api";
 import { AntDesign } from "@expo/vector-icons";
 import HeaderRedSearch from "../../components/HeaderRedSearch";
+import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 
-export default function Aulas() {
+export default function Aulas({ navigation }) {
   const [aulas, setAulas] = useState([]);
-
+  const [visible, setVisible] = useState(false);
+  const [pesquisa, setPesquisa] = useState("");
   useEffect(() => {
     async function loadAulas() {
       await api.get("/Aulas.json").then((resp) => {
@@ -38,50 +42,76 @@ export default function Aulas() {
           });
         }
         setAulas(aulasList);
+        setVisible(true);
       });
     }
     loadAulas();
   }, []);
   return (
     <Container>
-      <HeaderRedSearch />
+      <HeaderRedSearch navigation={navigation} />
       <Scroll contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}>
+        <SearchBar
+          lightTheme
+          placeholder="Pesquisar"
+          value={pesquisa}
+          onChangeText={(e) => setPesquisa(e)}
+          containerStyle={{
+            width: Dimensions.get("screen").width,
+            backgroundColor: "#F4F4F4",
+          }}
+          searchIcon={{ color: "#5B5B5B" }}
+          inputContainerStyle={{
+            backgroundColor: "#FFF",
+            borderRadius: 20,
+            height: 40,
+          }}
+          inputStyle={{color: '#5B5B5B', fontFamily: 'Cairo'}}
+        />
         <Title>Horário de Aula</Title>
-        {aulas.map((item) => (
-          <BoxAula style={styles.boxShadow} key={item.id}>
-            <BoxAulaSala>
-              <BoxSala>
-                <TextSala>Sala</TextSala>
-              </BoxSala>
-              <NumSala>001</NumSala>
-            </BoxAulaSala>
-            <BoxAulaText>
-              <TextTitle>{item.titulo}</TextTitle>
-              <TextSubTitle>{item.subtitulo}</TextSubTitle>
-              <TextHorario>Horários:</TextHorario>
-              <TextSubHorario>{item.horario_um}</TextSubHorario>
-              <TextSubHorario>{item.horario_dois}</TextSubHorario>
-              <BoxAulaAviso>
-                <TextAviso>{item.msg_aviso}</TextAviso>
-                <BoxAviso aviso={item.aviso}>
-                  {item.aviso == "aviso" ? (
-                    <AntDesign
-                      name="exclamationcircle"
-                      size={28}
-                      color="#F1CB42"
-                    />
-                  ) : null}
-                  {item.aviso == "sem aula" ? (
-                    <AntDesign name="closecircle" size={28} color="#FF5959" />
-                  ) : null}
-                  {item.aviso == "" ? (
-                    <AntDesign name="checkcircle" size={28} color="#44AA3B" />
-                  ) : null}
-                </BoxAviso>
-              </BoxAulaAviso>
-            </BoxAulaText>
-          </BoxAula>
-        ))}
+        {aulas.length ? (
+          aulas.map((item) => (
+            <BoxAula style={styles.boxShadow} key={item.id}>
+              <BoxAulaSala>
+                <BoxSala>
+                  <TextSala>Sala</TextSala>
+                </BoxSala>
+                <NumSala>{item.sala}</NumSala>
+              </BoxAulaSala>
+              <BoxAulaText>
+                <TextTitle>{item.titulo}</TextTitle>
+                <TextSubTitle>{item.subtitulo}</TextSubTitle>
+                <TextHorario>Horários:</TextHorario>
+                <TextSubHorario>{item.horario_um}</TextSubHorario>
+                <TextSubHorario>{item.horario_dois}</TextSubHorario>
+                <BoxAulaAviso>
+                  <TextAviso>{item.msg_aviso}</TextAviso>
+                  <BoxAviso aviso={item.aviso}>
+                    {item.aviso == "aviso" ? (
+                      <AntDesign
+                        name="exclamationcircle"
+                        size={28}
+                        color="#F1CB42"
+                      />
+                    ) : null}
+                    {item.aviso == "sem aula" ? (
+                      <AntDesign name="closecircle" size={28} color="#FF5959" />
+                    ) : null}
+                    {item.aviso == "" ? (
+                      <AntDesign name="checkcircle" size={28} color="#44AA3B" />
+                    ) : null}
+                  </BoxAviso>
+                </BoxAulaAviso>
+              </BoxAulaText>
+            </BoxAula>
+          ))
+        ) : (
+          <ShimmerPlaceHolder
+            autoRun={true}
+            visible={visible}
+            style={{ width: 340, height: 170, borderRadius: 10 }}
+          />
+        )}
       </Scroll>
     </Container>
   );

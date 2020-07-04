@@ -16,10 +16,10 @@ import {
 } from "./styles";
 import HeaderRed from "../../components/HeaderRed";
 
-export default function Links() {
+export default function Links({navigation}) {
   return (
     <Container>
-      <HeaderRed />
+      <HeaderRed navigation={navigation}/>
       <Scroll
         contentContainerStyle={{
           flexGrow: 1,

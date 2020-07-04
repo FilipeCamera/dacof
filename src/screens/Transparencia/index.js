@@ -19,12 +19,13 @@ import {
   Subtitle,
 } from "./styles";
 import { LineChart } from "react-native-chart-kit";
+import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 import HeaderRed from "../../components/HeaderRed";
 import { api } from "../../api";
 
-export default function Transparencia() {
+export default function Transparencia({ navigation }) {
   const [dados, setDados] = useState([]);
-
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     async function loadValores() {
       await api.get("/Transparencia.json").then((resp) => {
@@ -36,132 +37,172 @@ export default function Transparencia() {
           });
         }
         setDados(dadosList);
+        setVisible(true);
       });
     }
     loadValores();
   }, []);
   return (
     <Container>
-      <HeaderRed />
-      <Scroll contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}>
+      <HeaderRed navigation={navigation} />
+      <Scroll
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}
+      >
         <Title>Transparência</Title>
         <BoxScrollButton
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{paddingHorizontal: 10}}
+          contentContainerStyle={{ paddingHorizontal: 10, height: 150 }}
         >
-          {dados.map((item) => {
-            return (
-              <Button
-                icon={
-                  <BoxButton key={item.id}>
-                    <BoxHeaderButton>
-                      <TitleButton>{item.mes}</TitleButton>
-                      <AntDesign name="linechart" size={24} color="#963132" />
-                    </BoxHeaderButton>
-                    <BoxBodyButton>
-                      <TextBodyBlack>Ganhos</TextBodyBlack>
-                      <TextBodyBlackBold>R$ {item.ganhos.toFixed(2)}</TextBodyBlackBold>
-                      <TextBodyRed>Gastos</TextBodyRed>
-                      <TextBodyRedBold>R$ {item.gastos.toFixed(2)}</TextBodyRedBold>
-                    </BoxBodyButton>
-                  </BoxButton>
-                }
-                buttonStyle={{
-                  width: 150,
-                  height: 150,
-                  borderRadius: 20,
-                  backgroundColor: "#FF9090",
-                  marginLeft: 5,
-                  marginRight: 5,
-                }}
-              />
-            );
-          })}
+          {dados.length ? (
+            dados.map((item) => {
+              return (
+                <Button
+                  icon={
+                    <BoxButton key={item.id}>
+                      <BoxHeaderButton>
+                        <TitleButton>{item.mes}</TitleButton>
+                        <AntDesign name="linechart" size={24} color="#963132" />
+                      </BoxHeaderButton>
+                      <BoxBodyButton>
+                        <TextBodyBlack>Ganhos</TextBodyBlack>
+                        <TextBodyBlackBold>
+                          R$ {item.ganhos.toFixed(2)}
+                        </TextBodyBlackBold>
+                        <TextBodyRed>Gastos</TextBodyRed>
+                        <TextBodyRedBold>
+                          R$ {item.gastos.toFixed(2)}
+                        </TextBodyRedBold>
+                      </BoxBodyButton>
+                    </BoxButton>
+                  }
+                  buttonStyle={{
+                    width: 150,
+                    height: 150,
+                    borderRadius: 20,
+                    backgroundColor: "#FF9090",
+                    marginLeft: 5,
+                    marginRight: 5,
+                  }}
+                />
+              );
+            })
+          ) : (
+            <ShimmerPlaceHolder
+              autoRun={true}
+              visible={visible}
+              style={{ height: 150, width: Dimensions.get("screen").width }}
+            />
+          )}
         </BoxScrollButton>
         <Title>Estatística</Title>
         <Subtitle>Ganhos</Subtitle>
-        <LineChart
-          data={{
-            labels: [
-              "Jan",
-              "Fev",
-              "Mar",
-              "Abr",
-              "Mai",
-              "Jun",
-              "Jul",
-              "Ago",
-              "Set",
-              "Out",
-              "Nov",
-              "Dez",
-            ],
-            datasets: [
-              {
-                data: dados.map(item => item.ganhos),
+        {dados.length ? (
+          <LineChart
+            data={{
+              labels: [
+                "Jan",
+                "Fev",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Set",
+                "Out",
+                "Nov",
+                "Dez",
+              ],
+              datasets: [
+                {
+                  data: dados.map((item) => item.ganhos),
+                },
+              ],
+            }}
+            width={Dimensions.get("screen").width - 20}
+            height={200}
+            chartConfig={{
+              backgroundColor: "rgba(205, 205, 205, 0.25)",
+              backgroundGradientFrom: "rgba(75, 75, 75, 0.20)",
+              backgroundGradientTo: "rgba(75, 75, 75, 0.60)",
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 0.8) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16,
               },
-            ],
-          }}
-          width={Dimensions.get("screen").width - 20}
-          height={200}
-          chartConfig={{
-            backgroundColor: "rgba(205, 205, 205, 0.25)",
-            backgroundGradientFrom: "rgba(75, 75, 75, 0.20)",
-            backgroundGradientTo: "rgba(75, 75, 75, 0.60)",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 0.8) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
+            }}
+            bezier
+            style={{
+              marginVertical: 12,
               borderRadius: 16,
-            },
-          }}
-          bezier
-          style={{
-            marginVertical: 12,
-            borderRadius: 16,
-          }}
-        />
+            }}
+          />
+        ) : (
+          <ShimmerPlaceHolder
+            autoRun={true}
+            visible={visible}
+            style={{
+              height: 200,
+              width: Dimensions.get("screen").width - 20,
+              borderRadius: 16,
+            }}
+          ></ShimmerPlaceHolder>
+        )}
         <Subtitle>Gastos</Subtitle>
-        <LineChart
-          data={{
-            labels: [
-              "Jan",
-              "Fev",
-              "Mar",
-              "Abr",
-              "Mai",
-              "Jun",
-              "Jul",
-              "Ago",
-              "Set",
-              "Out",
-              "Nov",
-              "Dez",
-            ],
-            datasets: [
-              {
-                data: dados.map(item => item.gastos),
+        {dados.length ? (
+          <LineChart
+            data={{
+              labels: [
+                "Jan",
+                "Fev",
+                "Mar",
+                "Abr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Set",
+                "Out",
+                "Nov",
+                "Dez",
+              ],
+              datasets: [
+                {
+                  data: dados.map((item) => item.gastos),
+                },
+              ],
+            }}
+            width={Dimensions.get("screen").width - 20}
+            height={200}
+            chartConfig={{
+              backgroundColor: "rgba(159, 59, 51, 0.60)",
+              backgroundGradientFrom: "rgba(150, 49, 50, 0.20)",
+              backgroundGradientTo: "rgba(150, 49, 50, 0.60)",
+              decimalPlaces: 2, // optional, defaults to 2dp
+              color: (opacity = 0.8) => `rgba(255, 255, 255, ${opacity})`,
+              style: {
+                borderRadius: 16,
               },
-            ],
-          }}
-          width={Dimensions.get("screen").width - 20}
-          height={200}
-          chartConfig={{
-            backgroundColor: "rgba(159, 59, 51, 0.60)",
-            backgroundGradientFrom: "rgba(150, 49, 50, 0.20)",
-            backgroundGradientTo: "rgba(150, 49, 50, 0.60)",
-            decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 0.8) => `rgba(255, 255, 255, ${opacity})`,
-            style: {
+            }}
+            bezier
+            style={{
+              marginVertical: 12,
               borderRadius: 16,
-            },
-          }}
-          bezier
-          style={{
-            marginVertical: 12,
-            borderRadius: 16,
-          }}
-        />
+            }}
+          />
+        ) : (
+          <ShimmerPlaceHolder
+            autoRun={true}
+            visible={visible}
+            style={{
+              height: 200,
+              width: Dimensions.get("screen").width - 20,
+              borderRadius: 16,
+            }}
+          ></ShimmerPlaceHolder>
+        )}
       </Scroll>
     </Container>
   );

@@ -17,10 +17,11 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import HeaderRed from "../../components/HeaderRed";
 import dataRegional from "../../components/HorarioBus/Regional";
 import dataVSA from '../../components/HorarioBus/VSA';
-export default function Bus() {
+
+export default function Bus({navigation}) {
   return (
     <Container>
-      <HeaderRed />
+      <HeaderRed navigation={navigation}/>
       <Scroll
         contentContainerStyle={{
           flexGrow: 1,

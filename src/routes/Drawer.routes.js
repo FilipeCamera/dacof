@@ -17,7 +17,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Drawer = createDrawerNavigator();
 
-export default function Drawers({ route }) {
+export default function Drawers() {
   return (
     <Drawer.Navigator
       initialRouteName="Home"
@@ -26,8 +26,9 @@ export default function Drawers({ route }) {
         activeTintColor: "#9F3233",
         labelStyle: {
             fontFamily: 'Cairo-Semibold',
-        }
+        },
       }}
+      
     >
       <Drawer.Screen
         name="Home"

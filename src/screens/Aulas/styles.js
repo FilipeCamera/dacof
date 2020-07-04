@@ -9,7 +9,7 @@ export const Container = styled.View`
 export const Scroll = styled.ScrollView``;
 
 export const Title = styled.Text`
-  margin: 30px 0px 10px;
+  margin: 20px 0px 10px;
   font-family: "Cairo-Bold";
   font-size: 18px;
   color: #5b5b5b;
