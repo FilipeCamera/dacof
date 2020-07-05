@@ -1,12 +1,17 @@
 import styled from 'styled-components/native';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+
+const {width} = Dimensions.get('screen');
+
 export const Container = styled.View`
     flex: 1;
     background-color: #F4F4F4;
     align-items: center;
 `;
 
-export const Scroll = styled.ScrollView``;
+export const Scroll = styled.ScrollView`
+    width: 100%;
+`;
 
 export const Title = styled.Text`
     margin: 30px 0px 10px;
@@ -17,7 +22,7 @@ export const Title = styled.Text`
 
 export const BoxLink = styled.View`
     margin: 10px 10px;
-    width: 340px;
+    width: 90%;
     background-color: #FFF;
     border-radius: 10px;
 `;

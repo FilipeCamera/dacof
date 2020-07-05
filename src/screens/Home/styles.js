@@ -1,14 +1,16 @@
 import styled from 'styled-components/native';
+import {Dimensions} from 'react-native';
 
+const {width, height} = Dimensions.get('screen')
 export const Container = styled.View`
     flex: 1;
     background-color: #F6F6F6;
     align-items: center;
 `;
 export const BoxLogo = styled.View`
-    margin-top: 20px;
-    width: 240px;
-    height: 200px;
+    margin-top: 10px;
+    width: ${width - 95};
+    height: ${height/2 - 100};
     align-items: center;
     justify-content: center;
 `;
@@ -19,7 +21,7 @@ export const LogoImage = styled.Image`
 
 export const BoxMenu = styled.View`
     flex: 1;
-    height: 280px;
+    height: ${height/2 - 50};
     align-items: center;
     width: 100%;
     position: absolute;

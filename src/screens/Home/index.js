@@ -22,7 +22,7 @@ const data = [
   { title: 'E-mail', icon_name: 'email', link: 'Emails'},
 ];
 
-const { width } = Dimensions.get("screen");
+const { width, height } = Dimensions.get("screen");
 
 export default function Home({navigation}) {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -34,20 +34,20 @@ export default function Home({navigation}) {
         icon={
           <MaterialCommunityIcons
             name={item.icon_name}
-            size={80}
+            size={90}
             color="#5b5b5b"
           />
         }
         title={item.title}
         titleStyle={{
-          marginTop: 20,
+          marginTop: 10,
           fontFamily: "Cairo-Bold",
           color: "#5B5B5B",
           fontSize: 14,
         }}
         buttonStyle={{
           backgroundColor: "#FFF",
-          height: 160,
+          height: height/2 - 170,
           borderRadius: 10,
           flexDirection: "column",
           alignItems: 'center',
@@ -73,7 +73,7 @@ export default function Home({navigation}) {
           inactiveSlideOpacity={0.4}
           layout="default"
           sliderWidth={width}
-          itemWidth={200}
+          itemWidth={width - 160}
           renderItem={renderMenu}
           onSnapToItem={(index) => setActiveSlide(index)}
         />

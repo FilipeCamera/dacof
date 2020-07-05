@@ -1,12 +1,15 @@
 import React from "react";
 
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Container, Title, BoxForm } from "./styles";
 import HeaderRed from "../../components/HeaderRed";
 import { Input, Button } from "react-native-elements";
 
 export default function Ouvidoria({ navigation }) {
   return (
-    <Container>
+    <KeyboardAwareScrollView
+      contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}
+    >
       <HeaderRed navigation={navigation} />
       <Title>Ouvidoria</Title>
       <BoxForm>
@@ -60,6 +63,6 @@ export default function Ouvidoria({ navigation }) {
           backgroundColor: "#5B5B5B",
         }}
       />
-    </Container>
+    </KeyboardAwareScrollView>
   );
 }

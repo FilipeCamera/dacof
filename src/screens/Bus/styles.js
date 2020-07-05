@@ -48,7 +48,7 @@ export const CardSubText = styled.Text`
     color: #3B3B3B;
     text-align: center;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 `;
 export const BoxHorario = styled.View`
     width: 80%;

@@ -1,9 +1,13 @@
 import React from 'react'
 
-import {Container} from './styles'
+import {Container, Title} from './styles'
+import HeaderRed from '../../components/HeaderRed'
 
-export default function Emails(){
+export default function Emails({navigation}){
     return(
-        <Container/>
+        <Container>
+            <HeaderRed navigation={navigation}/>
+            <Title>E-mail</Title>
+        </Container>
     )
 }

@@ -25,7 +25,7 @@ import { api } from "../../api";
 
 export default function Transparencia({ navigation }) {
   const [dados, setDados] = useState([]);
-  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     async function loadValores() {
       await api.get("/Transparencia.json").then((resp) => {
@@ -37,7 +37,6 @@ export default function Transparencia({ navigation }) {
           });
         }
         setDados(dadosList);
-        setVisible(true);
       });
     }
     loadValores();
@@ -91,7 +90,6 @@ export default function Transparencia({ navigation }) {
           ) : (
             <ShimmerPlaceHolder
               autoRun={true}
-              visible={visible}
               style={{ height: 150, width: Dimensions.get("screen").width }}
             />
           )}
@@ -142,7 +140,6 @@ export default function Transparencia({ navigation }) {
         ) : (
           <ShimmerPlaceHolder
             autoRun={true}
-            visible={visible}
             style={{
               height: 200,
               width: Dimensions.get("screen").width - 20,
@@ -195,7 +192,6 @@ export default function Transparencia({ navigation }) {
         ) : (
           <ShimmerPlaceHolder
             autoRun={true}
-            visible={visible}
             style={{
               height: 200,
               width: Dimensions.get("screen").width - 20,
