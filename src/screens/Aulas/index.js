@@ -60,7 +60,10 @@ export default function Aulas({ navigation }) {
   return (
     <Container>
       <HeaderRedSearch navigation={navigation} />
-      <Scroll contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}>
+      <Scroll
+        contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}
+        showsVerticalScrollIndicator={false}
+      >
         <SearchBar
           lightTheme
           placeholder="Pesquisar"
