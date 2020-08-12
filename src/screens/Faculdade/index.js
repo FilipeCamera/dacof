@@ -5,10 +5,12 @@ import {
   BoxButton,
   BoxApresentation,
   Title,
+  Paragraph,
   styles,
 } from "./styles";
 import { Button } from "react-native-elements";
 import HeaderRed from "../../components/HeaderRed";
+import {historia, missao} from '../../components/HistoriaMissao';
 
 export default function Faculdade({navigation}) {
   const [textPrimaryColor, setPrimaryTextColor] = useState("#FFF");
@@ -70,6 +72,7 @@ export default function Faculdade({navigation}) {
       </BoxButton>
       <BoxApresentation style={styles.boxShadow}>
         <Title>{title}</Title>
+        <Paragraph>{title === 'História' ? historia : missao}</Paragraph>
       </BoxApresentation>
     </Container>
   );

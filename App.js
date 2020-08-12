@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { StatusBar } from 'expo-status-bar';
 import * as Font from 'expo-font';
 import {AppLoading} from 'expo';
 import Routes from './src/routes';
@@ -17,7 +16,6 @@ export default function App() {
   if(loadedFont){
     return(
       <>
-        <StatusBar style='light' backgroundColor='#9F3233' translucent={true}/>
         <Routes />
       </>
     )

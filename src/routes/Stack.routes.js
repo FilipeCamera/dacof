@@ -1,6 +1,5 @@
 import React from "react";
 
-import Home from "../screens/Home";
 import Faculdade from "../screens/Faculdade";
 import Aulas from "../screens/Aulas";
 import Emails from "../screens/Emails";

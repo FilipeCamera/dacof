@@ -16,8 +16,10 @@ export const Title = styled.Text`
 export const BoxScrollButton = styled.ScrollView``;
 
 export const BoxButton = styled.View`
-    flex-direction: column;
-    align-items: center;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
 `;
 export const BoxHeaderButton = styled.View`
     flex-direction: row;

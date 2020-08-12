@@ -31,6 +31,15 @@ export const Title = styled.Text`
     width: 90%;
 `;
 
+export const Paragraph = styled.Text`
+  margin: 0px 0px 20px;
+  font-family: 'Cairo-SemiBold';
+  color: #5b5b5b;
+  font-size: 14px;
+  text-align: center;
+  width: 90%;
+`;
+
 export const styles = StyleSheet.create({
     boxShadow: {
         backgroundColor: '#FFF',

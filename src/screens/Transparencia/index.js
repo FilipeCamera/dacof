@@ -6,7 +6,6 @@ import { AntDesign } from "@expo/vector-icons";
 import {
   Container,
   Title,
-  BoxScrollButton,
   BoxButton,
   BoxHeaderButton,
   TitleButton,
@@ -25,7 +24,7 @@ import { api } from "../../api";
 
 export default function Transparencia({ navigation }) {
   const [dados, setDados] = useState([]);
-
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     async function loadValores() {
       await api.get("/Transparencia.json").then((resp) => {
@@ -40,6 +39,7 @@ export default function Transparencia({ navigation }) {
       });
     }
     loadValores();
+    setVisible(true);
   }, []);
   return (
     <Container>
@@ -49,14 +49,17 @@ export default function Transparencia({ navigation }) {
         contentContainerStyle={{ flexGrow: 1, alignItems: "center" }}
       >
         <Title>Transparência</Title>
-        <BoxScrollButton
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ paddingHorizontal: 10, height: 150 }}
-        >
-          {dados.length ? (
-            dados.map((item) => {
-              return (
+        <BoxButton>
+          {dados.map((item) => {
+            return (
+              <ShimmerPlaceHolder
+                autoRun={true}
+                visible={visible}
+                style={{
+                  height: 150,
+                  width: Dimensions.get("screen").width - 20,
+                }}
+              >
                 <Button
                   icon={
                     <BoxButton key={item.id}>
@@ -83,17 +86,13 @@ export default function Transparencia({ navigation }) {
                     backgroundColor: "#FF9090",
                     marginLeft: 5,
                     marginRight: 5,
+                    marginTop: 10,
                   }}
                 />
-              );
-            })
-          ) : (
-            <ShimmerPlaceHolder
-              autoRun={true}
-              style={{ height: 150, width: Dimensions.get("screen").width }}
-            />
-          )}
-        </BoxScrollButton>
+              </ShimmerPlaceHolder>
+            );
+          })}
+        </BoxButton>
         <Title>Estatística</Title>
         <Subtitle>Ganhos</Subtitle>
         {dados.length ? (
@@ -123,7 +122,7 @@ export default function Transparencia({ navigation }) {
             height={200}
             chartConfig={{
               backgroundColor: "rgba(205, 205, 205, 0.25)",
-              backgroundGradientFrom: "rgba(75, 75, 75, 0.20)",
+              backgroundGradientFrom: "rgba(75, 75, 75, 0.40)",
               backgroundGradientTo: "rgba(75, 75, 75, 0.60)",
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 0.8) => `rgba(255, 255, 255, ${opacity})`,
@@ -174,8 +173,8 @@ export default function Transparencia({ navigation }) {
             width={Dimensions.get("screen").width - 20}
             height={200}
             chartConfig={{
-              backgroundColor: "rgba(159, 59, 51, 0.60)",
-              backgroundGradientFrom: "rgba(150, 49, 50, 0.20)",
+              backgroundColor: "rgba(159, 59, 51, 0.80)",
+              backgroundGradientFrom: "rgba(150, 49, 50, 0.40)",
               backgroundGradientTo: "rgba(150, 49, 50, 0.60)",
               decimalPlaces: 2, // optional, defaults to 2dp
               color: (opacity = 0.8) => `rgba(255, 255, 255, ${opacity})`,

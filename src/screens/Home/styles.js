@@ -8,7 +8,7 @@ export const Container = styled.View`
     align-items: center;
 `;
 export const BoxLogo = styled.View`
-    margin-top: 10px;
+    margin-top: 20px;
     width: ${width - 95};
     height: ${height/2 - 100};
     align-items: center;
